@@ -13,17 +13,6 @@ class PaplašinātaGrāmata(Book):
         pamata_info = super().paradi_info()
         return f"{pamata_info}, Žanrs: {self.žanrs}"
     
-    def iegut_gramatas_info_no_api(self):
-        api_url = f"https://www.googleapis.com/books/v1/volumes?q={self.nosaukums}+inauthor:{self.autors}"
-        response = requests.get(api_url)
-        data = response.json()
-
-        if response.status_code == 200 and 'items' in data:
-            grāmatas_info = data['items'][0]['volumeInfo']
-            apraksts = grāmatas_info.get('description')
-            return f"Grāmatas apraksts: {apraksts}"
-        else:
-            return "Neizdevās atrast informāciju par grāmatu."
 
     def paradi_lapas(self, grāmatas):
         """Grafiks lapu skaitam grāmatās."""
